@@ -9,6 +9,7 @@
     --bg:#0a0e14; --bg2:#0f1620; --panel:#141d2a; --panel2:#1a2535; --line:#26333f;
     --text:#f0f5fb; --muted:#8294a8; --faint:#4a5a6e;
     --green:#3ddc84; --green2:#2fb86d; --yellow:#f0c14b; --red:#ff5d52; --accent:#5aa9ff; --accent2:#3d7fd6;
+    --purple:#a98aff;
   }
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   body{
@@ -16,7 +17,6 @@
     color:var(--text); font-family:"Georgia","Songti SC",serif; min-height:100vh; padding:26px 14px 80px;
   }
   .wrap{max-width:560px;margin:0 auto;}
-  /* iPad 横屏：容器变宽，左右分栏 */
   @media (min-width:820px){
     .wrap{max-width:1100px;}
     .stage{display:flex;gap:28px;align-items:flex-start;}
@@ -25,34 +25,34 @@
     .figure{margin-top:0;}
     header h1{font-size:30px;}
   }
-  /* 右栏卡片网格：等大方块 */
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
   @media (max-width:819px){.grid{grid-template-columns:repeat(2,1fr);}}
   .card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px;aspect-ratio:1/1;display:flex;flex-direction:column;overflow:hidden;cursor:pointer;transition:transform .15s,border-color .2s;}
   @media (max-width:819px){.card{aspect-ratio:auto;min-height:120px;}}
   .card:active{transform:scale(.97);}
   .card.tap:hover{border-color:var(--accent);}
+  .card.soon{opacity:.7;}
+  .card.soon:hover{border-color:var(--purple);}
   .card h3{font-size:13px;color:var(--muted);letter-spacing:2px;margin-bottom:10px;font-weight:600;}
   .card .big{font-size:30px;font-weight:800;}
   .card .mini{font-size:11px;color:var(--faint);margin-top:auto;line-height:1.5;}
+  .card .soon-tag{font-size:9px;letter-spacing:1px;color:var(--purple);border:1px solid var(--purple);padding:1px 6px;border-radius:10px;align-self:flex-start;margin-bottom:6px;opacity:.8;}
   header{text-align:center;margin-bottom:6px;}
   header .badge{font-size:10px;letter-spacing:4px;color:var(--accent);border:1px solid var(--accent2);padding:3px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;opacity:.85;}
   header h1{font-size:26px;letter-spacing:8px;font-weight:600;background:linear-gradient(180deg,#fff,#aebece);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
   header .date{color:var(--muted);font-size:12px;margin-top:7px;letter-spacing:3px;}
+  header .brand-logo{width:96px;height:96px;border-radius:22px;display:block;margin:0 auto 10px;box-shadow:0 8px 24px rgba(0,0,0,.45);}
+  @media (min-width:820px){header .brand-logo{width:110px;height:110px;}}
 
-  .overall{margin:20px auto 10px;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 12px 40px rgba(0,0,0,.4);}
-  .overall .lbl{font-size:13px;color:var(--muted);letter-spacing:3px;}
-  .overall .lbl small{display:block;margin-top:6px;font-size:11px;letter-spacing:.5px;opacity:.85;line-height:1.5;max-width:200px;}
-  .overall .ring{position:relative;width:74px;height:74px;flex-shrink:0;}
-  .overall .ring svg{width:74px;height:74px;transform:rotate(-90deg);}
-  .overall .ring .num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;}
+  .ring{position:relative;}
+  .ring svg{transform:rotate(-90deg);}
+  .ring .num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;}
 
   .legend{display:flex;justify-content:center;gap:14px;margin:8px 0;font-size:11px;color:var(--muted);flex-wrap:wrap;}
   .legend span{display:inline-flex;align-items:center;gap:5px;}
   .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
   .dot.g{background:var(--green)}.dot.y{background:var(--yellow)}.dot.r{background:var(--red)}.dot.n{background:#2b3a4d;border:1px solid var(--line)}
 
-  /* 图 + 热区容器 */
   .figure{position:relative;width:100%;max-width:540px;margin:6px auto 0;}
   .figure img{width:100%;display:block;border-radius:14px;filter:drop-shadow(0 14px 30px rgba(0,0,0,.4));}
   .hot{position:absolute;border-radius:50%;cursor:pointer;border:2px solid transparent;background:rgba(90,169,255,0);transition:background .25s,border-color .2s,transform .15s;}
@@ -60,13 +60,9 @@
   .hot .tag{position:absolute;left:50%;top:-8px;transform:translate(-50%,-100%);background:var(--panel2);color:var(--text);font-size:10px;padding:3px 7px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;border:1px solid var(--line);}
   .hot:hover .tag{opacity:1;}
 
-  .tools{display:flex;justify-content:center;gap:12px;margin:18px auto 0;}
-  .tools button{flex:1;max-width:220px;padding:13px;border:1px solid var(--line);background:linear-gradient(160deg,var(--panel2),var(--panel));color:var(--text);border-radius:12px;font-family:inherit;font-size:14px;cursor:pointer;letter-spacing:1px;}
-  .tools button:active{transform:scale(.97);}
-
   .overlay{position:fixed;inset:0;background:rgba(4,8,14,.7);display:none;align-items:flex-end;justify-content:center;z-index:30;backdrop-filter:blur(4px);}
   .overlay.show{display:flex;}
-  .panel{background:linear-gradient(180deg,var(--panel2),var(--bg2));border-top:2px solid var(--accent);border-radius:22px 22px 0 0;width:100%;max-width:480px;padding:24px 24px 34px;animation:rise .3s cubic-bezier(.2,.85,.25,1);}
+  .panel{background:linear-gradient(180deg,var(--panel2),var(--bg2));border-top:2px solid var(--accent);border-radius:22px 22px 0 0;width:100%;max-width:480px;padding:24px 24px 34px;animation:rise .3s cubic-bezier(.2,.85,.25,1);max-height:88vh;overflow-y:auto;}
   @keyframes rise{from{transform:translateY(100%)}to{transform:translateY(0)}}
   .panel h2{font-size:20px;margin-bottom:5px;}
   .panel .sub{color:var(--muted);font-size:12px;margin-bottom:14px;}
@@ -88,7 +84,6 @@
   .toast{position:fixed;bottom:34px;left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(160deg,var(--green),var(--green2));color:#03140a;padding:14px 32px;border-radius:30px;font-size:14px;font-weight:800;opacity:0;pointer-events:none;transition:all .3s;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.45);}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-  /* 训练进度条 + 达标动画 */
   .progress-wrap{margin-top:8px;}
   .bar{height:10px;background:var(--bg);border-radius:6px;overflow:hidden;border:1px solid var(--line);}
   .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:6px;transition:width .5s;}
@@ -96,7 +91,6 @@
   .celebrate.show{opacity:1;transform:scale(1);animation:pop 1.2s ease;}
   @keyframes pop{0%{transform:scale(.5) rotate(-10deg)}40%{transform:scale(1.25) rotate(8deg)}70%{transform:scale(.95)}100%{transform:scale(1)}}
 
-  /* SOP 勾选列表（弹窗内） */
   .sop-group{margin-bottom:16px;}
   .sop-group .gname{font-size:12px;color:var(--accent);letter-spacing:1px;margin-bottom:8px;}
   .sop-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:background .2s,border-color .2s;}
@@ -104,54 +98,67 @@
   .sop-item .chk{width:22px;height:22px;border-radius:7px;border:2px solid var(--faint);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
   .sop-item.on .chk{background:var(--green);border-color:var(--green);color:#03140a;}
   .sop-item .mins{margin-left:auto;color:var(--faint);font-size:12px;}
+  .sop-item .mins.instant{color:var(--purple);}
 
   footer{text-align:center;color:var(--faint);font-size:11px;margin-top:22px;line-height:1.8;}
 
-  /* 最近打卡列表 */
-  .recent{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px;padding:16px 18px;}
-  .recent h3{font-size:13px;color:var(--muted);letter-spacing:2px;margin-bottom:12px;font-weight:600;}
   .recent .row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;}
-  .recent .row:last-child{border-bottom:none;}
-  .recent .row .nm{flex:1;color:var(--text);}
-  .recent .row .sc{font-weight:800;padding:2px 10px;border-radius:8px;color:#04101f;min-width:42px;text-align:center;}
-  .recent .row .dt{color:var(--faint);font-size:11px;}
-  .recent .empty{color:var(--faint);font-size:12px;text-align:center;padding:10px 0;}
+  #recentList .row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:12px;}
+  #recentList .row:last-child{border-bottom:none;}
+  #recentList .row .nm{flex:1;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #recentList .row .sc{font-weight:800;padding:1px 8px;border-radius:7px;color:#04101f;min-width:34px;text-align:center;font-size:11px;}
+  #recentList .empty{color:var(--faint);font-size:12px;}
+
+  /* 智能教练长条框 */
+  .coach{margin:18px auto 0;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:18px 22px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:border-color .2s;}
+  .coach:hover{border-color:var(--purple);}
+  .coach .ico{font-size:30px;}
+  .coach .txt{flex:1;}
+  .coach .txt h3{font-size:14px;letter-spacing:2px;margin-bottom:4px;}
+  .coach .txt p{font-size:11px;color:var(--faint);line-height:1.5;}
+  .coach .soon-tag{font-size:9px;letter-spacing:1px;color:var(--purple);border:1px solid var(--purple);padding:2px 8px;border-radius:10px;opacity:.8;flex-shrink:0;}
+
+  .reserve{margin:14px auto 0;background:var(--bg2);border:1px dashed var(--line);border-radius:16px;padding:16px 22px;text-align:center;color:var(--faint);font-size:12px;cursor:pointer;}
+  .reserve:hover{border-color:var(--purple);}
+
+  /* 导出选项弹窗 */
+  .opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:background .2s,border-color .2s;}
+  .opt:hover{border-color:var(--accent);background:rgba(90,169,255,.08);}
+  .opt .ico{font-size:18px;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="badge">GOLF BODY MONITOR</div>
+    <img src="logo.png" alt="2% logo" class="brand-logo">
     <h1>身 体 监 控</h1>
     <div class="date" id="today"></div>
   </header>
 
   <div class="stage">
    <div class="left">
-    <!-- 解剖图 + 透明热区。热区用百分比定位，图缩放时跟着缩放 -->
     <div class="figure" id="figure">
       <img src="body.jpeg" alt="人体肌肉图" id="bodyImg">
-      <!-- 热区由 JS 按 SPOTS 数组生成 -->
     </div>
    </div>
 
    <div class="right">
     <div class="grid">
 
-      <!-- 卡片1：今日整体 -->
+      <!-- 卡1：今日整体 -->
       <div class="card">
         <h3>今 日 整 体</h3>
-        <div class="ring" style="margin:0 auto;">
-          <svg viewBox="0 0 74 74">
+        <div class="ring" style="margin:0 auto;width:74px;height:74px;">
+          <svg viewBox="0 0 74 74" width="74" height="74">
             <circle cx="37" cy="37" r="31" fill="none" stroke="var(--line)" stroke-width="6"/>
             <circle id="ringFg" cx="37" cy="37" r="31" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="194.8" stroke-dashoffset="194.8"/>
           </svg>
           <div class="num" id="overallScore">—</div>
         </div>
-        <div class="mini" id="overallNote">点肌肉打分</div>
+        <div class="mini" id="overallNote">点肌肉打分（默认 100）</div>
       </div>
 
-      <!-- 卡片2：今天训练（时长 + 进度 + 动画） -->
+      <!-- 卡2：今天训练 -->
       <div class="card tap" id="trainCard">
         <h3>今 天 训 练</h3>
         <div class="big" id="trainMin">0<span style="font-size:13px;color:var(--faint)"> 分</span></div>
@@ -162,24 +169,24 @@
         <div class="celebrate" id="celebrate">🐦</div>
       </div>
 
-      <!-- 卡片3：SOP 库 -->
+      <!-- 卡3：SOP 库 -->
       <div class="card tap" id="sopCard">
         <h3>S O P 库</h3>
         <div class="big" id="sopCount">0<span style="font-size:13px;color:var(--faint)"> 项</span></div>
-        <div class="mini">点开勾选今天做了哪些练习</div>
+        <div class="mini">勾选今天练了哪些 · 自动同步今天训练</div>
       </div>
 
-      <!-- 卡4：最近打卡 -->
+      <!-- 卡4：需要注意的地方（原"最近打卡"） -->
       <div class="card">
-        <h3>最 近 打 卡</h3>
-        <div id="recentList" style="overflow:auto;flex:1;"><div class="mini">今天还没打卡</div></div>
+        <h3>伤 病 管 理</h3>
+        <div id="recentList" style="overflow:auto;flex:1;"><div class="empty">今天还没打卡</div></div>
       </div>
 
       <!-- 卡5：导出 -->
-      <div class="card tap" id="exportBtn">
+      <div class="card tap" id="exportCard">
         <h3>导 出 数 据</h3>
         <div class="big">📊</div>
-        <div class="mini" style="margin-top:auto;">下载 txt 备份到本地</div>
+        <div class="mini" style="margin-top:auto;">当天 / 最近 1–30 天</div>
       </div>
 
       <!-- 卡6：图例 -->
@@ -193,133 +200,240 @@
         </div>
       </div>
 
-      <!-- 卡7：备注 -->
-      <div class="card">
+      <!-- 卡7：Mental 心理 -->
+      <div class="card tap" id="mentalCard">
+        <h3>M E N T A L 心 理</h3>
+        <div class="big" id="mentalIco">❤️</div>
+        <div class="mini" id="mentalNote" style="margin-top:auto;">记今天的思考 / 心理状态</div>
+      </div>
+
+      <!-- 卡8：果岭专项 -->
+      <div class="card tap" id="greenCard">
+        <h3>果 岭 专 项</h3>
+        <div class="big">⛳</div>
+        <div class="mini" style="margin-top:auto;">Reading 看线 + 速度控制</div>
+      </div>
+
+      <!-- 卡9：备注 -->
+      <div class="card tap" id="noteCard">
         <h3>备 注</h3>
-        <div class="mini" style="margin:auto 0;">这块写每天的临时备注<br>（以后接 SOP 指导 / AI 建议）</div>
-      </div>
-
-      <!-- 卡8：预留 1 -->
-      <div class="card">
-        <h3>预 留 1</h3>
-        <div class="big" style="color:var(--faint);">➕</div>
-        <div class="mini" style="margin-top:auto;">趋势图 / 历史曲线</div>
-      </div>
-
-      <!-- 卡9：预留 2 -->
-      <div class="card">
-        <h3>预 留 2</h3>
-        <div class="big" style="color:var(--faint);">➕</div>
-        <div class="mini" style="margin-top:auto;">战术卡 / 选杆测算</div>
+        <div class="big" id="noteIco">📝</div>
+        <div class="mini" id="noteSummary" style="margin-top:auto;">今天的临时备注</div>
       </div>
 
     </div>
    </div>
   </div>
 
+  <!-- 智能教练长条框（占位，W7 接 API） -->
+  <div class="coach" id="coachBar">
+        <div class="txt">
+      <h3>智 能 教 练</h3>
+      <p>问它"我今天状态如何""离下个计划还有几天" · 它根据你的身体数据给建议</p>
+    </div>
+    <div class="soon-tag">W7 上线</div>
+  </div>
+
+  <!-- 最下方预留长框 -->
+  <div class="reserve" id="reserveBar">➕ 预留位（趋势图 / 战术卡 / 选杆测算 · W7 后做）</div>
+
   <footer>
     点肌肉圆点 → 打分 / 记录 · 每天按日期归档 · 圆点颜色 = 历史平均<br>
-    “今天整体几分，重要肌肉就别发超过几分的力”
+    "今天整体几分，重要肌肉就别发超过几分的力"
   </footer>
 </div>
 
-  <div class="overlay" id="overlay">
-    <div class="panel">
-      <h2 id="pTitle">肌肉</h2>
-      <div class="sub">拖动打分，写下今天的感觉</div>
-      <div class="hist" id="hist"></div>
-      <div class="score-row">
-        <input type="range" min="0" max="100" value="75" id="score">
-        <div class="score-val" id="scoreVal">75</div>
-      </div>
-      <label class="fld">备注（病症 / 感觉 / 代偿情况）</label>
-      <textarea id="comment" placeholder="例：右肩外侧拉伸时发紧，击球瞬间靠核心代偿……"></textarea>
-      <div class="btns">
-        <button class="act clear" id="clearBtn">清除今天</button>
-        <button class="act save" id="saveBtn">保存今天</button>
-      </div>
+<!-- 打分弹窗 -->
+<div class="overlay" id="overlay">
+  <div class="panel">
+    <h2 id="pTitle">肌肉</h2>
+    <div class="sub">拖动打分，写下今天的感觉（默认 100，往下调）</div>
+    <div class="hist" id="hist"></div>
+    <div class="score-row">
+      <input type="range" min="0" max="100" value="100" id="score">
+      <div class="score-val" id="scoreVal">100</div>
+    </div>
+    <label class="fld">备注（病症 / 感觉 / 代偿情况）</label>
+    <textarea id="comment" placeholder="例：右肩外侧拉伸时发紧，击球瞬间靠核心代偿……"></textarea>
+    <div class="btns">
+      <button class="act clear" id="clearBtn">清除今天</button>
+      <button class="act save" id="saveBtn">保存今天</button>
     </div>
   </div>
+</div>
 
-  <!-- SOP 库勾选弹窗 -->
-  <div class="overlay" id="sopOverlay">
-    <div class="panel">
-      <h2>今 天 的 训 练</h2>
-      <div class="sub">勾上今天做了的，每项 15 分钟 · 满 2 小时解锁 🐦</div>
-      <div id="sopList"></div>
-      <div class="btns">
-        <button class="act clear" id="sopClear">清空今天</button>
-        <button class="act save" id="sopSave">保存</button>
-      </div>
+<!-- SOP 库勾选弹窗 -->
+<div class="overlay" id="sopOverlay">
+  <div class="panel">
+    <h2>今 天 的 训 练</h2>
+    <div class="sub">勾上今天做的 · 计时项每项 15 分钟，⚡项勾选即加分 · 满 2 小时解锁 🐦</div>
+    <div id="sopList"></div>
+    <div class="btns">
+      <button class="act clear" id="sopClear">清空今天</button>
+      <button class="act save" id="sopSave">保存</button>
     </div>
   </div>
+</div>
 
-  <div class="toast" id="toast">✅ 已保存</div>
+<!-- 导出选项弹窗 -->
+<div class="overlay" id="exportOverlay">
+  <div class="panel">
+    <h2>导 出 数 据</h2>
+    <div class="sub">选时间范围，导出 txt 存到本地</div>
+    <div id="exportOpts"></div>
+    <div class="btns">
+      <button class="act clear" id="exportClose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- Mental 心理弹窗 -->
+<div class="overlay" id="mentalOverlay">
+  <div class="panel">
+    <h2>M E N T A L 心 理</h2>
+    <div class="sub">记今天思考过程 / 心理素质上要注意的</div>
+    <label class="fld">今天的心理记录</label>
+    <textarea id="mentalText" placeholder="例：第3洞推杆前心跳快，没稳住——下次先深呼吸再看线。心平要不变。"></textarea>
+    <div class="btns">
+      <button class="act clear" id="mentalClear">清除今天</button>
+      <button class="act save" id="mentalSave">保存今天</button>
+    </div>
+  </div>
+</div>
+
+<!-- 果岭专项弹窗 -->
+<div class="overlay" id="greenOverlay">
+  <div class="panel">
+    <h2>果 岭 专 项</h2>
+    <div class="sub">约一半杆数在果岭附近 · 记今天的看线和速度练习</div>
+    <label class="fld">Reading 看线</label>
+    <textarea id="greenRead" placeholder="例：上坡左曲，瞄准右边一个杯口……"></textarea>
+    <label class="fld">速度控制</label>
+    <textarea id="greenSpeed" placeholder="例：长推总是不够，今天练习固定钟摆幅度……"></textarea>
+    <div class="btns">
+      <button class="act clear" id="greenClear">清除今天</button>
+      <button class="act save" id="greenSave">保存今天</button>
+    </div>
+  </div>
+</div>
+
+<!-- 备注弹窗 -->
+<div class="overlay" id="noteOverlay">
+  <div class="panel">
+    <h2>今 日 备 注</h2>
+    <div class="sub">每天的临时备注</div>
+    <textarea id="noteText" placeholder="今天的任何临时记录……"></textarea>
+    <div class="btns">
+      <button class="act clear" id="noteClear">清除今天</button>
+      <button class="act save" id="noteSave">保存今天</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">✅ 已保存</div>
 
 <script>
-  // ====== 热区坐标表（百分比，相对整张图）======
-  // x,y = 圆心位置%，r = 半径%。第一版按图估算，点不准我们再调。
+  // ====== 热区坐标表（按新主图重新对位）======
+  // 新图：正面在左半边(0-50%)，背面在右半边(50-100%)，人物比旧图更大
   const SPOTS = [
     // —— 正面（图左半边）——
-    {name:"颈部 (胸锁乳突肌)", x:35.5, y:15, r:2.0},
-    {name:"左三角肌·正面", x:25.5, y:17.5, r:2.6},
-    {name:"右三角肌·正面", x:43.5, y:17.5, r:2.6},
-    {name:"左胸大肌", x:30.5, y:20.5, r:2.8},
-    {name:"右胸大肌", x:39, y:20.5, r:2.8},
-    {name:"左肱二头肌", x:23, y:24, r:2.4},
-    {name:"右肱二头肌", x:46.5, y:24, r:2.4},
-    {name:"左前臂屈肌 (握力)", x:21.5, y:30, r:2.4},
-    {name:"右前臂屈肌 (握力)", x:48, y:30, r:2.4},
-    {name:"上腹直肌", x:34.5, y:25, r:2.4},
-    {name:"下腹直肌", x:34.5, y:30, r:2.4},
-    {name:"左腹外斜肌 (转体)", x:30, y:29, r:2.2},
-    {name:"右腹外斜肌 (转体)", x:39.5, y:29, r:2.2},
-    {name:"左股四头肌", x:31, y:42, r:3},
-    {name:"右股四头肌", x:39, y:42, r:3},
-    {name:"左大腿内收肌", x:35, y:40, r:2},
-    {name:"左胫前肌·小腿前", x:31.5, y:58, r:2.6},
-    {name:"右胫前肌·小腿前", x:38.5, y:58, r:2.6},
+    {name:"颈部 (胸锁乳突肌)", x:23, y:16, r:2.0},
+    {name:"左三角肌·正面", x:14, y:19, r:2.6},
+    {name:"右三角肌·正面", x:31.5, y:19, r:2.6},
+    {name:"左胸大肌", x:19.5, y:22, r:2.8},
+    {name:"右胸大肌", x:27, y:22, r:2.8},
+    {name:"左肱二头肌", x:11.5, y:27, r:2.4},
+    {name:"右肱二头肌", x:34, y:27, r:2.4},
+    {name:"左前臂屈肌 (握力)", x:9.5, y:34, r:2.4},
+    {name:"右前臂屈肌 (握力)", x:36, y:34, r:2.4},
+    {name:"上腹直肌", x:23, y:27, r:2.4},
+    {name:"下腹直肌", x:23, y:32, r:2.4},
+    {name:"左腹外斜肌 (转体)", x:18.5, y:31, r:2.2},
+    {name:"右腹外斜肌 (转体)", x:27.5, y:31, r:2.2},
+    {name:"左股四头肌", x:19, y:47, r:3},
+    {name:"右股四头肌", x:27, y:47, r:3},
+    {name:"左大腿内收肌", x:23, y:43, r:2},
+    {name:"左胫前肌·小腿前", x:19.5, y:66, r:2.6},
+    {name:"右胫前肌·小腿前", x:26.5, y:66, r:2.6},
 
     // —— 背面（图右半边）——
-    {name:"斜方肌 (上/中)", x:67.5, y:16, r:2.8},
-    {name:"左后三角肌", x:60.5, y:17.5, r:2.6},
-    {name:"右后三角肌", x:74.5, y:17.5, r:2.6},
-    {name:"左大圆肌·小圆肌 (肩袖)", x:62, y:20.5, r:2.2},
-    {name:"右大圆肌·小圆肌 (肩袖)", x:73, y:20.5, r:2.2},
-    {name:"左背阔肌 (挥杆主力)", x:62.5, y:25, r:2.8},
-    {name:"右背阔肌 (挥杆主力)", x:72.5, y:25, r:2.8},
-    {name:"竖脊肌 (下背·腰)", x:67.5, y:30, r:2.2},
-    {name:"左肱三头肌", x:57.5, y:24, r:2.4},
-    {name:"右肱三头肌", x:77.5, y:24, r:2.4},
-    {name:"左臀大肌 (发力源)", x:63.5, y:34, r:2.8},
-    {name:"右臀大肌 (发力源)", x:71.5, y:34, r:2.8},
-    {name:"左腘绳肌", x:63, y:44, r:3},
-    {name:"右腘绳肌", x:72, y:44, r:3},
-    {name:"左腓肠肌·小腿后", x:63.5, y:58, r:2.6},
-    {name:"右腓肠肌·小腿后", x:71.5, y:58, r:2.6},
+    {name:"斜方肌 (上/中)", x:73, y:17, r:2.8},
+    {name:"左后三角肌", x:65, y:19, r:2.6},
+    {name:"右后三角肌", x:81, y:19, r:2.6},
+    {name:"左大圆肌·小圆肌 (肩袖)", x:67, y:22, r:2.2},
+    {name:"右大圆肌·小圆肌 (肩袖)", x:79, y:22, r:2.2},
+    {name:"左背阔肌 (挥杆主力)", x:68.5, y:27, r:2.8},
+    {name:"右背阔肌 (挥杆主力)", x:77.5, y:27, r:2.8},
+    {name:"竖脊肌 (下背·腰)", x:73, y:32, r:2.2},
+    {name:"左肱三头肌", x:62, y:27, r:2.4},
+    {name:"右肱三头肌", x:84, y:27, r:2.4},
+    {name:"左臀大肌 (发力源)", x:69, y:38, r:2.8},
+    {name:"右臀大肌 (发力源)", x:77, y:38, r:2.8},
+    {name:"左腘绳肌", x:69, y:49, r:3},
+    {name:"右腘绳肌", x:77, y:49, r:3},
+    {name:"左腓肠肌·小腿后", x:69.5, y:66, r:2.6},
+    {name:"右腓肠肌·小腿后", x:76.5, y:66, r:2.6},
   ];
 
   const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
   const dd=new Date();
   document.getElementById('today').textContent=dd.getFullYear()+' 年 '+(dd.getMonth()+1)+' 月 '+dd.getDate()+' 日';
 
+  // ====== 数据（key 全部保持兼容，旧数据不丢）======
   const KEY='golf_body_monitor_v3';
   let data={}; try{const raw=localStorage.getItem(KEY); if(raw)data=JSON.parse(raw);}catch(e){}
 
   // ====== SOP 库 + 今日训练 ======
+  // mins=计时项每项15分钟；instant=勾选即加分、不计时长（热敷/用药这类）
   const SOP_LIB=[
-    {g:"恢复类", items:["充气按摩","热敷","用药"]},
-    {g:"热身练习", items:["皮筋撑拉","重物拧拉","握力器握杆","球杆握力"]},
-    {g:"空挥练习", items:["空挥杆"]},
+    {g:"恢复类（勾选即加分·不计时）", items:[
+      {name:"充气按摩", instant:true},
+      {name:"热敷", instant:true},
+      {name:"用药", instant:true},
+    ]},
+    {g:"大热身包（早上固定 15 分钟）", items:[
+      {name:"大热身包（含所有工具）", mins:15},
+    ]},
+    {g:"热身练习（每项 15 分钟）", items:[
+      {name:"皮筋撑拉", mins:15},
+      {name:"重物拧拉", mins:15},
+      {name:"握力器握杆", mins:15},
+      {name:"球杆握力", mins:15},
+      {name:"马步抓地", mins:15},
+    ]},
+    {g:"空挥练习（每项 15 分钟）", items:[
+      {name:"空挥杆", mins:15},
+    ]},
+    {g:"击球练习（每项 15 分钟）", items:[
+      {name:"58° 短杆", mins:15},
+      {name:"52° · 半挥", mins:15},
+      {name:"52° · 全挥", mins:15},
+      {name:"8 号铁 · 半挥", mins:15},
+      {name:"8 号铁 · 全挥", mins:15},
+      {name:"Driver · 半挥", mins:15},
+      {name:"Driver · 全挥", mins:15},
+    ]},
   ];
-  const SOP_MIN=15;            // 每项 15 分钟
-  const GOAL_MIN=120;          // 达标线 2 小时
+  // 扁平查表：名字 -> 配置
+  const SOP_MAP={}; SOP_LIB.forEach(g=>g.items.forEach(it=>SOP_MAP[it.name]=it));
+  const SOP_MIN=15;
+  const GOAL_MIN=120;
+  const INSTANT_POINT=15; // 每个⚡项折算多少分钟（用于进度展示）
   const TKEY='golf_training_v1';
   let train={}; try{const raw=localStorage.getItem(TKEY); if(raw)train=JSON.parse(raw);}catch(e){}
 
   function todaySops(){ return train[todayStr()] || []; }
-  function trainMinutes(){ return todaySops().length * SOP_MIN; }
+  function trainMinutes(){
+    let m=0;
+    todaySops().forEach(n=>{ const c=SOP_MAP[n]; if(c){ m += c.instant ? INSTANT_POINT : (c.mins||SOP_MIN); } else { m+=SOP_MIN; } });
+    return m;
+  }
   function saveTrain(){ try{localStorage.setItem(TKEY,JSON.stringify(train));}catch(e){} }
+
+  // ====== Mental / 果岭 / 备注 数据 ======
+  const MKEY='golf_mental_v1'; let mental={}; try{const r=localStorage.getItem(MKEY);if(r)mental=JSON.parse(r);}catch(e){}
+  const GKEY='golf_green_v1';  let green={};  try{const r=localStorage.getItem(GKEY);if(r)green=JSON.parse(r);}catch(e){}
+  const NKEY='golf_note_v1';   let note={};   try{const r=localStorage.getItem(NKEY);if(r)note=JSON.parse(r);}catch(e){}
 
   const getCSS=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   const colorFor=s=>{if(s===null||s===undefined)return null;if(s>=75)return getCSS('--green');if(s>=50)return getCSS('--yellow');return getCSS('--red');};
@@ -350,22 +464,20 @@
       else { el.style.background='rgba(90,169,255,0)'; el.style.borderColor='transparent'; }
     });
   }
-  function hexA(hex,a){ // #rrggbb -> rgba
-    const h=hex.replace('#',''); const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);
-    return `rgba(${r},${g},${b},${a})`;
-  }
+  function hexA(hex,a){const h=hex.replace('#','');const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);return `rgba(${r},${g},${b},${a})`;}
 
   function renderOverall(){
     const todays=SPOTS.map(s=>todayScoreOf(s.name)).filter(x=>x!==null);
     const numEl=document.getElementById('overallScore'),note=document.getElementById('overallNote'),ring=document.getElementById('ringFg');
     const C=2*Math.PI*31;
-    if(!todays.length){numEl.textContent='—';numEl.style.color='var(--muted)';note.textContent='点肌肉打分，自动算平均';ring.style.strokeDashoffset=C;return;}
+    if(!todays.length){numEl.textContent='—';numEl.style.color='var(--muted)';note.textContent='点肌肉打分（默认 100）';ring.style.strokeDashoffset=C;return;}
     const avg=Math.round(todays.reduce((p,c)=>p+c,0)/todays.length);
     numEl.textContent=avg;numEl.style.color=colorFor(avg);
     ring.style.stroke=colorFor(avg);ring.style.strokeDashoffset=C*(1-avg/100);
-    note.textContent='今天已记录 '+todays.length+' 块 · 别发超过 '+avg+' 分的力';
+    note.textContent='已记录 '+todays.length+' 块 · 别发超过 '+avg+' 分的力';
   }
 
+  // ====== 打分弹窗（默认 100）======
   let current=null;
   const overlay=document.getElementById('overlay'),pTitle=document.getElementById('pTitle');
   const score=document.getElementById('score'),scoreVal=document.getElementById('scoreVal');
@@ -374,7 +486,7 @@
   function openPanel(name){
     current=name; pTitle.textContent=name;
     const rec=(data[name]||{})[todayStr()]||{};
-    score.value=(typeof rec.score==='number')?rec.score:75; scoreVal.textContent=score.value; tint(score.value);
+    score.value=(typeof rec.score==='number')?rec.score:100; scoreVal.textContent=score.value; tint(score.value);
     comment.value=rec.comment||'';
     const a=avgFor(name),n=daysFor(name),prev=prevScoreOf(name),tdy=(typeof rec.score==='number')?rec.score:null;
     hist.innerHTML='';
@@ -402,13 +514,56 @@
   function close(){overlay.classList.remove('show');current=null;}
   function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){}}
 
-  document.getElementById('exportBtn').onclick=()=>{
-    let txt='身体监控 · 过往数据导出\n生成时间：'+todayStr()+'\n\n';
-    SPOTS.forEach(s=>{const a=avgFor(s.name); txt+= a!==null?`  ${s.name}：平均 ${a} 分（${daysFor(s.name)} 天）\n`:`  ${s.name}：—\n`;});
-    const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');a.href=url;a.download='身体监控_'+todayStr()+'.txt';a.click();URL.revokeObjectURL(url);
-    toast('✅ 已导出');
+  // ====== 导出（多时间维度）======
+  const exportOverlay=document.getElementById('exportOverlay');
+  const EXPORT_RANGES=[
+    {label:'当天数据', days:0},
+    {label:'最近 1 天', days:1},{label:'最近 2 天', days:2},{label:'最近 3 天', days:3},
+    {label:'最近 4 天', days:4},{label:'最近 5 天', days:5},{label:'最近 6 天', days:6},
+    {label:'最近 7 天', days:7},{label:'最近 30 天', days:30},
+  ];
+  document.getElementById('exportCard').onclick=()=>{
+    const box=document.getElementById('exportOpts'); box.innerHTML='';
+    EXPORT_RANGES.forEach(r=>{
+      const it=document.createElement('div'); it.className='opt';
+      it.innerHTML='<span class="ico">📄</span><span>'+r.label+'</span>';
+      it.onclick=()=>doExport(r); box.appendChild(it);
+    });
+    exportOverlay.classList.add('show');
   };
+  document.getElementById('exportClose').onclick=()=>exportOverlay.classList.remove('show');
+  exportOverlay.onclick=e=>{if(e.target===exportOverlay)exportOverlay.classList.remove('show');};
+
+  function dateNDaysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function doExport(range){
+    const today=todayStr();
+    let txt='身体监控 · 数据导出（'+range.label+'）\n生成时间：'+today+'\n\n';
+    if(range.days===0){
+      txt+='【今天打分】\n';
+      let any=false;
+      SPOTS.forEach(s=>{const t=todayScoreOf(s.name);if(t!==null){txt+='  '+s.name+'：'+t+' 分\n';any=true;}});
+      if(!any)txt+='  （今天还没打分）\n';
+      txt+='\n【今天训练】\n'+(todaySops().length?todaySops().map(x=>'  ✓ '+x).join('\n'):'  （无）')+'\n';
+      txt+='  合计 '+trainMinutes()+' 分钟\n';
+      if(mental[today])txt+='\n【今天心理】\n  '+mental[today]+'\n';
+      if(green[today])txt+='\n【今天果岭】\n  看线：'+(green[today].read||'')+'\n  速度：'+(green[today].speed||'')+'\n';
+      if(note[today])txt+='\n【今天备注】\n  '+note[today]+'\n';
+    } else {
+      const from=dateNDaysAgo(range.days-1);
+      txt+='区间：'+from+' ~ '+today+'\n\n【各肌肉记录】\n';
+      SPOTS.forEach(s=>{
+        const r=data[s.name]; if(!r)return;
+        const ds=Object.keys(r).filter(d=>d>=from&&d<=today).sort();
+        if(!ds.length)return;
+        txt+='  '+s.name+'：\n';
+        ds.forEach(d=>{txt+='    '+d+' → '+r[d].score+' 分'+(r[d].comment?'（'+r[d].comment+'）':'')+'\n';});
+      });
+    }
+    const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='身体监控_'+range.label+'_'+today+'.txt';a.click();URL.revokeObjectURL(url);
+    exportOverlay.classList.remove('show');
+    toast('✅ 已导出：'+range.label);
+  }
 
   const toastEl=document.getElementById('toast');let tt=null;
   function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),2000);}
@@ -431,7 +586,7 @@
     }
   }
 
-  // SOP 弹窗
+  // ====== SOP 弹窗（计时 + ⚡即时项）======
   const sopOverlay=document.getElementById('sopOverlay');
   function openSop(){
     const list=document.getElementById('sopList'); list.innerHTML='';
@@ -439,48 +594,110 @@
     SOP_LIB.forEach(group=>{
       const gd=document.createElement('div'); gd.className='sop-group';
       const gn=document.createElement('div'); gn.className='gname'; gn.textContent=group.g; gd.appendChild(gn);
-      group.items.forEach(name=>{
-        const on=picked.includes(name);
-        const it=document.createElement('div'); it.className='sop-item'+(on?' on':'');
-        it.innerHTML='<span class="chk">'+(on?'✓':'')+'</span><span>'+name+'</span><span class="mins">15 分</span>';
-        it.onclick=()=>{
-          it.classList.toggle('on');
-          const isOn=it.classList.contains('on');
-          it.querySelector('.chk').textContent=isOn?'✓':'';
+      group.items.forEach(it=>{
+        const on=picked.includes(it.name);
+        const row=document.createElement('div'); row.className='sop-item'+(on?' on':'');
+        const minsLabel = it.instant ? '<span class="mins instant">⚡ 加分</span>' : '<span class="mins">15 分</span>';
+        row.innerHTML='<span class="chk">'+(on?'✓':'')+'</span><span>'+it.name+'</span>'+minsLabel;
+        row.onclick=()=>{
+          row.classList.toggle('on');
+          row.querySelector('.chk').textContent=row.classList.contains('on')?'✓':'';
         };
-        it.dataset.name=name;
-        gd.appendChild(it);
+        row.dataset.name=it.name;
+        gd.appendChild(row);
       });
       list.appendChild(gd);
     });
     sopOverlay.classList.add('show');
   }
   document.getElementById('sopCard').onclick=openSop;
-  document.getElementById('trainCard').onclick=openSop;
+  document.getElementById('trainCard').onclick=openSop;  // 今日训练 ↔ SOP库 同一个弹窗（B2 去重）
   sopOverlay.onclick=e=>{if(e.target===sopOverlay)sopOverlay.classList.remove('show');};
   document.getElementById('sopSave').onclick=()=>{
     const chosen=[...document.querySelectorAll('#sopList .sop-item.on')].map(el=>el.dataset.name);
     train[todayStr()]=chosen; saveTrain();
     sopOverlay.classList.remove('show'); renderTrain();
-    toast('✅ 已记录 '+chosen.length+' 项 · '+chosen.length*SOP_MIN+' 分钟');
+    toast('✅ 已记录 '+chosen.length+' 项 · '+trainMinutes()+' 分钟');
   };
   document.getElementById('sopClear').onclick=()=>{
     delete train[todayStr()]; saveTrain();
     sopOverlay.classList.remove('show'); renderTrain(); toast('已清空今天训练');
   };
 
+  // ====== Mental 心理 ======
+  const mentalOverlay=document.getElementById('mentalOverlay');
+  document.getElementById('mentalCard').onclick=()=>{
+    document.getElementById('mentalText').value=mental[todayStr()]||'';
+    mentalOverlay.classList.add('show');
+  };
+  mentalOverlay.onclick=e=>{if(e.target===mentalOverlay)mentalOverlay.classList.remove('show');};
+  document.getElementById('mentalSave').onclick=()=>{
+    const v=document.getElementById('mentalText').value.trim();
+    if(v)mental[todayStr()]=v; else delete mental[todayStr()];
+    try{localStorage.setItem(MKEY,JSON.stringify(mental));}catch(e){}
+    mentalOverlay.classList.remove('show'); renderMini(); toast('✅ 已保存心理记录');
+  };
+  document.getElementById('mentalClear').onclick=()=>{
+    delete mental[todayStr()]; try{localStorage.setItem(MKEY,JSON.stringify(mental));}catch(e){}
+    mentalOverlay.classList.remove('show'); renderMini(); toast('已清除');
+  };
+
+  // ====== 果岭专项 ======
+  const greenOverlay=document.getElementById('greenOverlay');
+  document.getElementById('greenCard').onclick=()=>{
+    const g=green[todayStr()]||{};
+    document.getElementById('greenRead').value=g.read||'';
+    document.getElementById('greenSpeed').value=g.speed||'';
+    greenOverlay.classList.add('show');
+  };
+  greenOverlay.onclick=e=>{if(e.target===greenOverlay)greenOverlay.classList.remove('show');};
+  document.getElementById('greenSave').onclick=()=>{
+    const read=document.getElementById('greenRead').value.trim();
+    const speed=document.getElementById('greenSpeed').value.trim();
+    if(read||speed)green[todayStr()]={read,speed}; else delete green[todayStr()];
+    try{localStorage.setItem(GKEY,JSON.stringify(green));}catch(e){}
+    greenOverlay.classList.remove('show'); toast('✅ 已保存果岭记录');
+  };
+  document.getElementById('greenClear').onclick=()=>{
+    delete green[todayStr()]; try{localStorage.setItem(GKEY,JSON.stringify(green));}catch(e){}
+    greenOverlay.classList.remove('show'); toast('已清除');
+  };
+
+  // ====== 备注 ======
+  const noteOverlay=document.getElementById('noteOverlay');
+  document.getElementById('noteCard').onclick=()=>{
+    document.getElementById('noteText').value=note[todayStr()]||'';
+    noteOverlay.classList.add('show');
+  };
+  noteOverlay.onclick=e=>{if(e.target===noteOverlay)noteOverlay.classList.remove('show');};
+  document.getElementById('noteSave').onclick=()=>{
+    const v=document.getElementById('noteText').value.trim();
+    if(v)note[todayStr()]=v; else delete note[todayStr()];
+    try{localStorage.setItem(NKEY,JSON.stringify(note));}catch(e){}
+    noteOverlay.classList.remove('show'); renderMini(); toast('✅ 已保存备注');
+  };
+  document.getElementById('noteClear').onclick=()=>{
+    delete note[todayStr()]; try{localStorage.setItem(NKEY,JSON.stringify(note));}catch(e){}
+    noteOverlay.classList.remove('show'); renderMini(); toast('已清除');
+  };
+
+  // 卡片上的小预览
+  function renderMini(){
+    const m=mental[todayStr()];
+    document.getElementById('mentalNote').textContent = m ? m.slice(0,18)+(m.length>18?'…':'') : '记今天的思考 / 心理状态';
+    const n=note[todayStr()];
+    document.getElementById('noteSummary').textContent = n ? n.slice(0,18)+(n.length>18?'…':'') : '今天的临时备注';
+  }
+
+  // ====== 需要注意的地方（原最近打卡：分低的排前面）======
   function renderRecent(){
     const list=document.getElementById('recentList');
-    // 收集今天所有打过分的肌肉
     const items=[];
-    SPOTS.forEach(s=>{
-      const t=todayScoreOf(s.name);
-      if(t!==null) items.push({name:s.name,score:t});
-    });
+    SPOTS.forEach(s=>{const t=todayScoreOf(s.name); if(t!==null) items.push({name:s.name,score:t});});
     if(!items.length){ list.innerHTML='<div class="empty">今天还没打卡</div>'; return; }
-    items.sort((a,b)=>a.score-b.score); // 分低的排前面（最需要注意）
+    items.sort((a,b)=>a.score-b.score);
     list.innerHTML='';
-    items.forEach(it=>{
+    items.slice(0,6).forEach(it=>{
       const row=document.createElement('div'); row.className='row';
       const nm=document.createElement('span'); nm.className='nm'; nm.textContent=it.name;
       const sc=document.createElement('span'); sc.className='sc'; sc.textContent=it.score; sc.style.background=colorFor(it.score);
@@ -488,7 +705,12 @@
     });
   }
 
-  paintHots(); renderOverall(); renderRecent(); renderTrain();
+  // ====== 占位框：点了提示 W7 ======
+  document.getElementById('coachBar').onclick=()=>toast('🤖 智能教练 W7 学完 API 后上线');
+  document.getElementById('reserveBar').onclick=()=>toast('➕ 趋势图 / 战术卡 · W7 后做');
+
+  // 初始化
+  paintHots(); renderOverall(); renderRecent(); renderTrain(); renderMini();
 </script>
 </body>
 </html>
